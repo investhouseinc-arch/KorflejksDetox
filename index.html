@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌽 Cornflejks Detox - Capital Clicker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72, #2a5298, #667eea);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ff8c00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-label {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .amount-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .amount-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .amount-input:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .start-btn {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            font-size: 1.3rem;
+            padding: 20px;
+        }
+
+        .start-btn:hover {
+            background: linear-gradient(45deg, #218838, #1aa085);
+        }
+
+        .start-btn:disabled {
+            background: linear-gradient(45deg, #6c757d, #5a6268);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .click-btn {
+            background: linear-gradient(45deg, #ffd700, #ff8c00);
+            color: white;
+            font-size: 1.5rem;
+            padding: 25px;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+
+        .click-btn:hover {
+            background: linear-gradient(45deg, #ffed4a, #ff7300);
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .stats-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .current-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin: 15px 0;
+        }
+
+        .stats-info {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        .profit-card {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .profit-amount {
+            color: #28a745;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .profit-percent {
+            color: #20c997;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .secondary-btn {
+            background: rgba(108, 117, 125, 0.3);
+            color: #adb5bd;
+            border: 1px solid rgba(108, 117, 125, 0.5);
+            padding: 12px;
+            font-size: 0.9rem;
+        }
+
+        .reset-btn {
+            background: rgba(220, 53, 69, 0.3);
+            color: #f8d7da;
+            border: 1px solid rgba(220, 53, 69, 0.5);
+        }
+
+        .stats-btn {
+            background: rgba(0, 123, 255, 0.3);
+            color: #cce7ff;
+            border: 1px solid rgba(0, 123, 255, 0.5);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🌽 Cornflejks Detox</h1>
+        
+        <!-- Sekcja startowa -->
+        <div id="startSection">
+            <div class="input-section">
+                <label class="input-label">Wprowadź kwotę startową:</label>
+                <input 
+                    type="number" 
+                    id="initialAmount" 
+                    class="amount-input" 
+                    placeholder="np. 1000" 
+                    min="0" 
+                    step="0.01"
+                >
+            </div>
+            <button id="startBtn" class="btn start-btn">🚀 Rozpocznij Detox</button>
+        </div>
+
+        <!-- Sekcja gry -->
+        <div id="gameSection" class="hidden">
+            <div class="stats-card">
+                <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Aktualny kapitał:</div>
+                <div id="currentAmount" class="current-amount">0,00 zł</div>
+                <div class="stats-info">
+                    <span>Kliknięcia: <span id="clickCount">0</span></span>
+                    <span>+1.8% za klik</span>
+                </div>
+            </div>
+
+            <button id="clickBtn" class="btn click-btn">💎 KLIKNIJ I ZARABIAJ!</button>
+
+            <div class="profit-card">
+                <div class="profit-amount" id="profitAmount">Zysk: 0,00 zł</div>
+                <div class="profit-percent" id="profitPercent">0,00% wzrostu</div>
+            </div>
+
+            <div class="button-grid">
+                <button id="resetBtn" class="btn secondary-btn reset-btn">🔄 Reset</button>
+                <button id="statsBtn" class="btn secondary-btn stats-btn">📊 Statystyki</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class CornflejksDetox {
+            constructor() {
+                this.initialAmount = 0;
+                this.currentAmount = 0;
+                this.clicks = 0;
+                this.gameStarted = false;
+
+                this.initEventListeners();
+            }
+
+            initEventListeners() {
+                document.getElementById('startBtn').addEventListener('click', () => this.startGame());
+                document.getElementById('clickBtn').addEventListener('click', () => this.handleClick());
+                document.getElementById('resetBtn').addEventListener('click', () => this.resetGame());
+                document.getElementById('statsBtn').addEventListener('click', () => this.showStats());
+
+                // Enter na input
+                document.getElementById('initialAmount').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.startGame();
+                });
+
+                // Walidacja input
+                document.getElementById('initialAmount').addEventListener('input', () => this.validateInput());
+            }
+
+            validateInput() {
+                const input = document.getElementById('initialAmount');
+                const startBtn = document.getElementById('startBtn');
+                const value = parseFloat(input.value);
+
+                if (value > 0) {
+                    startBtn.disabled = false;
+                } else {
+                    startBtn.disabled = true;
+                }
+            }
+
+            startGame() {
+                const input = document.getElementById('initialAmount');
+                const amount = parseFloat(input.value);
+
+                if (amount > 0) {
+                    this.initialAmount = amount;
+                    this.currentAmount = amount;
+                    this.clicks = 0;
+                    this.gameStarted = true;
+
+                    this.showGameSection();
+                    this.updateDisplay();
+                }
+            }
+
+            handleClick() {
+                this.currentAmount *= 1.018;
+                this.clicks++;
+                this.updateDisplay();
+
+                // Efekt wizualny
+                const btn = document.getElementById('clickBtn');
+                btn.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    btn.style.transform = 'scale(1)';
+                }, 100);
+            }
+
+            resetGame() {
+                this.gameStarted = false;
+                this.currentAmount = 0;
+                this.clicks = 0;
+                this.initialAmount = 0;
+
+                document.getElementById('initialAmount').value = '';
+                this.showStartSection();
+            }
+
+            showStats() {
+                const profit = this.currentAmount - this.initialAmount;
+                const profitPercent = ((this.currentAmount / this.initialAmount - 1) * 100).toFixed(2);
+
+                alert(`🌽 CORNFLEJKS DETOX - STATYSTYKI 🌽\n\n💰 Zysk: ${this.formatCurrency(profit)}\n📈 Wzrost: ${profitPercent}%\n🖱️ Kliknięcia: ${this.clicks}\n💎 Kapitał początkowy: ${this.formatCurrency(this.initialAmount)}\n🚀 Kapitał aktualny: ${this.formatCurrency(this.currentAmount)}`);
+            }
+
+            updateDisplay() {
+                document.getElementById('currentAmount').textContent = this.formatCurrency(this.currentAmount);
+                document.getElementById('clickCount').textContent = this.clicks;
+
+                const profit = this.currentAmount - this.initialAmount;
+                const profitPercent = ((this.currentAmount / this.initialAmount - 1) * 100).toFixed(2);
+
+                document.getElementById('profitAmount').textContent = `Zysk: ${this.formatCurrency(profit)}`;
+                document.getElementById('profitPercent').textContent = `${profitPercent}% wzrostu`;
+            }
+
+            formatCurrency(amount) {
+                return new Intl.NumberFormat('pl-PL', {
+                    style: 'currency',
+                    currency: 'PLN',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(amount);
+            }
+
+            showGameSection() {
+                document.getElementById('startSection').classList.add('hidden');
+                document.getElementById('gameSection').classList.remove('hidden');
+            }
+
+            showStartSection() {
+                document.getElementById('gameSection').classList.add('hidden');
+                document.getElementById('startSection').classList.remove('hidden');
+                document.getElementById('startBtn').disabled = true;
+            }
+        }
+
+        // Inicjalizacja gry
+        document.addEventListener('DOMContentLoaded', () => {
+            new CornflejksDetox();
+        });
+    </script>
+</body>
+</html>
