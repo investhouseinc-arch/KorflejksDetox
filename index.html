@@ -124,15 +124,37 @@
             animation: pulse 2s infinite;
         }
 
-        .click-btn:hover {
+        .click-btn:disabled {
+            background: linear-gradient(45deg, #6c757d, #5a6268);
+            cursor: not-allowed;
+            animation: none;
+        }
+
+        .click-btn:hover:not(:disabled) {
             background: linear-gradient(45deg, #ffed4a, #ff7300);
             animation: none;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .trading-message {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            color: #ffd700;
+            font-size: 0.9rem;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 1s ease-in-out;
         }
 
         .stats-card {
@@ -227,7 +249,7 @@
                     step="0.01"
                 >
             </div>
-            <button id="startBtn" class="btn start-btn">🚀 Rozpocznij Detox</button>
+            <button id="startBtn" class="btn start-btn" disabled>🚀 Rozpocznij Detox</button>
         </div>
 
         <!-- Sekcja gry -->
@@ -256,123 +278,249 @@
     </div>
 
     <script>
-        class CornflejksDetox {
-            constructor() {
-                this.initialAmount = 0;
-                this.currentAmount = 0;
-                this.clicks = 0;
-                this.gameStarted = false;
+        let initialAmount = 0;
+        let currentAmount = 0;
+        let clicks = 0;
+        let gameStarted = false;
 
-                this.initEventListeners();
-            }
+        function formatCurrency(amount) {
+            return amount.toLocaleString('pl-PL', {
+                style: 'currency',
+                currency: 'PLN',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
 
-            initEventListeners() {
-                document.getElementById('startBtn').addEventListener('click', () => this.startGame());
-                document.getElementById('clickBtn').addEventListener('click', () => this.handleClick());
-                document.getElementById('resetBtn').addEventListener('click', () => this.resetGame());
-                document.getElementById('statsBtn').addEventListener('click', () => this.showStats());
+        function validateInput() {
+            const input = document.getElementById('initialAmount');
+            const startBtn = document.getElementById('startBtn');
+            const value = parseFloat(input.value);
 
-                // Enter na input
-                document.getElementById('initialAmount').addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') this.startGame();
-                });
-
-                // Walidacja input
-                document.getElementById('initialAmount').addEventListener('input', () => this.validateInput());
-            }
-
-            validateInput() {
-                const input = document.getElementById('initialAmount');
-                const startBtn = document.getElementById('startBtn');
-                const value = parseFloat(input.value);
-
-                if (value > 0) {
-                    startBtn.disabled = false;
-                } else {
-                    startBtn.disabled = true;
-                }
-            }
-
-            startGame() {
-                const input = document.getElementById('initialAmount');
-                const amount = parseFloat(input.value);
-
-                if (amount > 0) {
-                    this.initialAmount = amount;
-                    this.currentAmount = amount;
-                    this.clicks = 0;
-                    this.gameStarted = true;
-
-                    this.showGameSection();
-                    this.updateDisplay();
-                }
-            }
-
-            handleClick() {
-                this.currentAmount *= 1.018;
-                this.clicks++;
-                this.updateDisplay();
-
-                // Efekt wizualny
-                const btn = document.getElementById('clickBtn');
-                btn.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    btn.style.transform = 'scale(1)';
-                }, 100);
-            }
-
-            resetGame() {
-                this.gameStarted = false;
-                this.currentAmount = 0;
-                this.clicks = 0;
-                this.initialAmount = 0;
-
-                document.getElementById('initialAmount').value = '';
-                this.showStartSection();
-            }
-
-            showStats() {
-                const profit = this.currentAmount - this.initialAmount;
-                const profitPercent = ((this.currentAmount / this.initialAmount - 1) * 100).toFixed(2);
-
-                alert(`🌽 CORNFLEJKS DETOX - STATYSTYKI 🌽\n\n💰 Zysk: ${this.formatCurrency(profit)}\n📈 Wzrost: ${profitPercent}%\n🖱️ Kliknięcia: ${this.clicks}\n💎 Kapitał początkowy: ${this.formatCurrency(this.initialAmount)}\n🚀 Kapitał aktualny: ${this.formatCurrency(this.currentAmount)}`);
-            }
-
-            updateDisplay() {
-                document.getElementById('currentAmount').textContent = this.formatCurrency(this.currentAmount);
-                document.getElementById('clickCount').textContent = this.clicks;
-
-                const profit = this.currentAmount - this.initialAmount;
-                const profitPercent = ((this.currentAmount / this.initialAmount - 1) * 100).toFixed(2);
-
-                document.getElementById('profitAmount').textContent = `Zysk: ${this.formatCurrency(profit)}`;
-                document.getElementById('profitPercent').textContent = `${profitPercent}% wzrostu`;
-            }
-
-            formatCurrency(amount) {
-                return new Intl.NumberFormat('pl-PL', {
-                    style: 'currency',
-                    currency: 'PLN',
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                }).format(amount);
-            }
-
-            showGameSection() {
-                document.getElementById('startSection').classList.add('hidden');
-                document.getElementById('gameSection').classList.remove('hidden');
-            }
-
-            showStartSection() {
-                document.getElementById('gameSection').classList.add('hidden');
-                document.getElementById('startSection').classList.remove('hidden');
-                document.getElementById('startBtn').disabled = true;
+            if (value > 0) {
+                startBtn.disabled = false;
+            } else {
+                startBtn.disabled = true;
             }
         }
 
-        // Inicjalizacja gry
-        document.addEventListener('DOMContentLoaded', () => {
-            new CornflejksDetox();
+        function startGame() {
+            const input = document.getElementById('initialAmount');
+            const amount = parseFloat(input.value);
+
+            if (amount > 0) {
+                initialAmount = amount;
+                currentAmount = amount;
+                clicks = 0;
+                gameStarted = true;
+
+                showGameSection();
+                updateDisplay();
+            }
+        }
+
+        // Dane do losowego handlu
+        const tradingData = {
+            shops: [
+                "Biedronka na Rynku w Radomiu",
+                "Lidl przy lesie Kabackim", 
+                "Dino na Wilanowie",
+                "Żabka przy dworcu w Sosnowcu",
+                "Tesco w Galerii Mokotów",
+                "Auchan na Targówku",
+                "Carrefour w Złotych Tarasach",
+                "Netto na osiedlu Gocław",
+                "Polomarket w Ząbkach",
+                "Intermarché w Wołominie",
+                "Stokrotka na Bemowie",
+                "Delikatesy Centrum w Wilanowie",
+                "Kaufland na Ursynowie",
+                "Leclerc w Warszawie",
+                "Piotr i Paweł na Żoliborzu"
+            ],
+            items: [
+                "marchewka ekologiczna",
+                "banany z Ekwadoru", 
+                "ołówki HB",
+                "rower górski używany",
+                "kredki 24 kolory",
+                "ziemniaki młode",
+                "pomidory malinowe",
+                "długopis niebieski",
+                "jabłka szampion",
+                "cebula biała",
+                "brokuły świeże",
+                "flamastry zmywalne",
+                "gruszki konferencja",
+                "kalarepa młoda",
+                "zeszyt w kratkę A5",
+                "cytryny hiszpańskie",
+                "papryka czerwona",
+                "gumka do mazania",
+                "pomarańcze tureckie",
+                "sałata lodowa"
+            ],
+            buyers: [
+                "sąsiad z klatki obok",
+                "dzieciaki na boisku szkolnym",
+                "babcia z Allegro",
+                "koleżanka z pracy",
+                "wujek z wesela",
+                "pani z tartaku", 
+                "pan z budowy obok",
+                "studentka z AGH",
+                "emeryt z ławki w parku",
+                "mama koleżanki",
+                "kierowca Ubera",
+                "listonosz Janusz",
+                "hydraulik Marek",
+                "ciocia z Krakowa",
+                "mechanik z warsztatu",
+                "fryzjerka Basia",
+                "księgowa ze spółdzielni",
+                "nauczycielka od matmy",
+                "sprzedawca z kiosku",
+                "rencista z bloku C"
+            ]
+        };
+
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        function handleClick() {
+            // Wyłącz przycisk podczas handlu
+            const btn = document.getElementById('clickBtn');
+            btn.disabled = true;
+            btn.textContent = "🔄 TRWA HANDEL...";
+
+            // Efekt wizualny
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 100);
+
+            // Losowe dane handlu
+            const buyShop = getRandomItem(tradingData.shops);
+            const sellBuyer = getRandomItem(tradingData.buyers);
+            const item = getRandomItem(tradingData.items);
+            const buyPrice = (Math.random() * 50 + 5).toFixed(2);
+            const sellPrice = (parseFloat(buyPrice) * 1.18).toFixed(2);
+
+            const messages = [
+                `🔍 Rozpoczynam skanowanie różnic cenowych...`,
+                `📊 Znalazłem okazję! ${item} w ${buyShop}`,
+                `💼 Przygotowuję zlecenie kupna za ${buyPrice} zł`,
+                `🛒 Kupuję ${item} w ${buyShop}`,
+                `📞 Kontaktuję się z ${sellBuyer}`,
+                `💰 Sprzedaję za ${sellPrice} zł! Handel zakończony!`
+            ];
+
+            showTradingMessages(messages, 0, () => {
+                // Po zakończeniu handlu
+                currentAmount *= 1.018;
+                clicks++;
+                updateDisplay();
+                
+                // Przywróć przycisk
+                btn.disabled = false;
+                btn.textContent = "💎 KLIKNIJ I ZARABIAJ!";
+            });
+        }
+
+        function showTradingMessages(messages, index, callback) {
+            if (index >= messages.length) {
+                callback();
+                return;
+            }
+
+            // Znajdź lub utwórz element na komunikaty
+            let messageDiv = document.getElementById('tradingMessages');
+            if (!messageDiv) {
+                messageDiv = document.createElement('div');
+                messageDiv.id = 'tradingMessages';
+                messageDiv.style.cssText = `
+                    background: rgba(0, 0, 0, 0.3);
+                    border-radius: 10px;
+                    padding: 15px;
+                    margin: 10px 0;
+                    color: #ffd700;
+                    font-size: 0.9rem;
+                    text-align: center;
+                    border: 1px solid rgba(255, 215, 0, 0.3);
+                    min-height: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                `;
+                document.getElementById('gameSection').insertBefore(messageDiv, document.getElementById('clickBtn').nextSibling);
+            }
+
+            messageDiv.textContent = messages[index];
+            messageDiv.style.animation = 'none';
+            setTimeout(() => {
+                messageDiv.style.animation = 'pulse 1s ease-in-out';
+            }, 10);
+
+            setTimeout(() => {
+                showTradingMessages(messages, index + 1, callback);
+            }, 5000); // Co 5 sekund
+        }
+
+        function resetGame() {
+            gameStarted = false;
+            currentAmount = 0;
+            clicks = 0;
+            initialAmount = 0;
+
+            document.getElementById('initialAmount').value = '';
+            showStartSection();
+        }
+
+        function showStats() {
+            const profit = currentAmount - initialAmount;
+            const profitPercent = ((currentAmount / initialAmount - 1) * 100).toFixed(2);
+
+            alert(`🌽 CORNFLEJKS DETOX - STATYSTYKI 🌽\n\n💰 Zysk: ${formatCurrency(profit)}\n📈 Wzrost: ${profitPercent}%\n🖱️ Kliknięcia: ${clicks}\n💎 Kapitał początkowy: ${formatCurrency(initialAmount)}\n🚀 Kapitał aktualny: ${formatCurrency(currentAmount)}`);
+        }
+
+        function updateDisplay() {
+            document.getElementById('currentAmount').textContent = formatCurrency(currentAmount);
+            document.getElementById('clickCount').textContent = clicks;
+
+            const profit = currentAmount - initialAmount;
+            const profitPercent = ((currentAmount / initialAmount - 1) * 100).toFixed(2);
+
+            document.getElementById('profitAmount').textContent = `Zysk: ${formatCurrency(profit)}`;
+            document.getElementById('profitPercent').textContent = `${profitPercent}% wzrostu`;
+        }
+
+        function showGameSection() {
+            document.getElementById('startSection').classList.add('hidden');
+            document.getElementById('gameSection').classList.remove('hidden');
+        }
+
+        function showStartSection() {
+            document.getElementById('gameSection').classList.add('hidden');
+            document.getElementById('startSection').classList.remove('hidden');
+            document.getElementById('startBtn').disabled = true;
+        }
+
+        // Inicjalizacja po załadowaniu strony
+        document.addEventListener('DOMContentLoaded', function() {
+            // Event listeners
+            document.getElementById('startBtn').addEventListener('click', startGame);
+            document.getElementById('clickBtn').addEventListener('click', handleClick);
+            document.getElementById('resetBtn').addEventListener('click', resetGame);
+            document.getElementById('statsBtn').addEventListener('click', showStats);
+
+            // Enter na input
+            document.getElementById('initialAmount').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') startGame();
+            });
+
+            // Walidacja input
+            document.getElementById('initialAmount').addEventListener('input', validateInput);
         });
     </script>
 </body>
