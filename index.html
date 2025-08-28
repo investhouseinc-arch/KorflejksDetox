@@ -593,9 +593,6 @@
             const transactionType = getRandomItem(tradingData.transactionTypes);
             const negotiationMethod = getRandomItem(tradingData.negotiationMethods);
             const negotiationGuru = getRandomItem(tradingData.negotiationGurus);
-            const buyPrice = (Math.random() * 50 + 5).toFixed(2);
-            const sellPrice = (parseFloat(buyPrice) * 1.018).toFixed(2);
-            
             // PRAWDZIWY zysk oparty na kapitale
             const realProfit = (currentAmount * 0.018).toFixed(2);
             const investmentAmount = (currentAmount * (Math.random() * 0.1 + 0.05)).toFixed(2); // 5-15% kapitału na inwestycję
@@ -617,8 +614,6 @@
                 transactionType: transactionType,
                 negotiationMethod: negotiationMethod,
                 negotiationGuru: negotiationGuru,
-                buyPrice: buyPrice,
-                sellPrice: sellPrice,
                 investmentAmount: investmentAmount,
                 realProfit: realProfit,
                 currentCapital: formatCurrency(currentAmount)
