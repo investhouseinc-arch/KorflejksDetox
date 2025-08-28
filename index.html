@@ -472,6 +472,50 @@
                 { type: "LONG", description: "Pozycja długa - zakup z oczekiwaniem wzrostu" },
                 { type: "SHORT", description: "Pozycja krótka - sprzedaż z oczekiwaniem spadku" },
                 { type: "ARBITRAŻ", description: "Różnica kursowa między lokalizacjami" }
+            ],
+            negotiationMethods: [
+                "używając techniki lustrzanego odbicia",
+                "stosując metodę 'tak, tak, tak' z psychologii sprzedaży",
+                "grając na emocjach i pilności transakcji",
+                "używając techniki 'ograniczonej dostępności'",
+                "stosując metodę 'stopy w drzwiach'",
+                "używając techniki 'dobry policjant, zły policjant'",
+                "grając kartą 'ostatnia sztuka w magazynie'",
+                "stosując metodę 'społecznego dowodu słuszności'",
+                "używając techniki 'wzajemności i darmowych próbek'",
+                "grając na FOMO (fear of missing out)",
+                "stosując klasyczną metodę 'tak, ale...'",
+                "używając techniki 'anchoring' z wysoką ceną wyjściową",
+                "grając kartą 'specjalna oferta tylko dla Ciebie'",
+                "stosując metodę 'końcowych korzyści'",
+                "używając techniki 'ciszy po ofercie'",
+                "grając na nostalgiach z dzieciństwa",
+                "stosując metodę 'świadectw zadowolonych klientów'",
+                "używając techniki 'porównania z konkurencją'",
+                "grając kartą 'inwestycji w przyszłość'",
+                "stosując klasyczne 'kupujesz czy nie?'"
+            ],
+            negotiationGurus: [
+                "korzystając z rad Briana Tracy",
+                "stosując techniki Roberta Cialdini z 'Wywierania Wpływu'",
+                "używając metod Jordana Belforta (Wilk z Wall Street)",
+                "korzystając z poradników Zigu Ziglara",
+                "stosując techniki z kursu 'Sprzedaj Wszystko Wszystkim'",
+                "używając rad babci Haliny z bazaru na Różyckiego",
+                "korzystając z wiedzy wujka Zbyszka - mistrza targowania",
+                "stosując metody z filmu 'Glengarry Glen Ross'",
+                "używając technik sprzedawcy odkurzaczy z lat 90'",
+                "korzystając z poradnika 'Jak Sprzedać Lodówkę Eskimosowi'",
+                "stosując rady z kanału YouTube 'Sprzedaż dla Opornych'",
+                "używając metod handlarza samochodami z Bemowa",
+                "korzystając z technik telemarketerów z call center",
+                "stosując rady z kursu MLM 'Zostań Miliarderem'",
+                "używając metod sprzedawcy encyklopedii door-to-door",
+                "korzystając z technik agenta nieruchomości z Mokotowa",
+                "stosując rady z poradnika 'Psychologia Klienta'",
+                "używając metod sprzedawcy z teleshopu nocnego",
+                "korzystając z technik konsultanta Avon",
+                "stosując starą szkołę handlu z czasów PRL-u"
             ]
         };
 
@@ -498,6 +542,12 @@
                         <div class="transaction-type">${transactionData.transactionType.type}</div>
                         <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-top: 5px;">
                             ${transactionData.transactionType.description}
+                        </div>
+                        
+                        <div style="background: rgba(138, 43, 226, 0.2); border: 1px solid rgba(138, 43, 226, 0.3); border-radius: 10px; padding: 10px; margin: 10px 0; color: #dda0dd;">
+                            <div style="font-weight: bold; font-size: 0.9rem;">🎯 Metoda negocjacyjna:</div>
+                            <div style="font-size: 0.85rem; margin-top: 3px;">${transactionData.negotiationGuru}</div>
+                            <div style="font-size: 0.8rem; margin-top: 5px; font-style: italic;">${transactionData.negotiationMethod}</div>
                         </div>
                         
                         <div class="profit-highlight">
@@ -541,6 +591,8 @@
             const sellBuyer = getRandomItem(tradingData.buyers);
             const item = getRandomItem(tradingData.items);
             const transactionType = getRandomItem(tradingData.transactionTypes);
+            const negotiationMethod = getRandomItem(tradingData.negotiationMethods);
+            const negotiationGuru = getRandomItem(tradingData.negotiationGurus);
             const buyPrice = (Math.random() * 50 + 5).toFixed(2);
             const sellPrice = (parseFloat(buyPrice) * 1.18).toFixed(2);
             const profit = (parseFloat(sellPrice) - parseFloat(buyPrice)).toFixed(2);
@@ -551,6 +603,7 @@
                 `💼 Przygotowuję zlecenie ${transactionType.type} za ${buyPrice} zł`,
                 `🛒 Kupuję ${item} w ${buyShop}`,
                 `📞 Kontaktuję się z ${sellBuyer}`,
+                `🎯 Rozpoczynam negocjacje ${negotiationGuru} - ${negotiationMethod}`,
                 `💰 Sprzedaję za ${sellPrice} zł! Handel zakończony!`
             ];
 
@@ -559,6 +612,8 @@
                 buyShop: buyShop,
                 sellBuyer: sellBuyer,
                 transactionType: transactionType,
+                negotiationMethod: negotiationMethod,
+                negotiationGuru: negotiationGuru,
                 buyPrice: buyPrice,
                 sellPrice: sellPrice,
                 profit: profit
