@@ -230,6 +230,92 @@
         .hidden {
             display: none;
         }
+
+        /* Popup styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .popup-title {
+            color: #ffd700;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        .popup-close {
+            background: rgba(220, 53, 69, 0.8);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .popup-close:hover {
+            background: rgba(220, 53, 69, 1);
+            transform: scale(1.1);
+        }
+
+        .transaction-details {
+            color: white;
+            line-height: 1.6;
+        }
+
+        .transaction-type {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        .profit-highlight {
+            background: rgba(40, 167, 69, 0.3);
+            color: #28a745;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 1px solid rgba(40, 167, 69, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -381,11 +467,61 @@
                 "nauczycielka od matmy",
                 "sprzedawca z kiosku",
                 "rencista z bloku C"
+            ],
+            transactionTypes: [
+                { type: "LONG", description: "Pozycja długa - zakup z oczekiwaniem wzrostu" },
+                { type: "SHORT", description: "Pozycja krótka - sprzedaż z oczekiwaniem spadku" },
+                { type: "ARBITRAŻ", description: "Różnica kursowa między lokalizacjami" }
             ]
         };
 
         function getRandomItem(array) {
             return array[Math.floor(Math.random() * array.length)];
+        }
+
+        function showTransactionPopup(transactionData) {
+            const popup = document.createElement('div');
+            popup.className = 'popup-overlay';
+            popup.innerHTML = `
+                <div class="popup-content">
+                    <div class="popup-header">
+                        <div class="popup-title">💹 Transakcja Zakończona</div>
+                        <button class="popup-close" onclick="closeTransactionPopup()">×</button>
+                    </div>
+                    <div class="transaction-details">
+                        <div><strong>📦 Aktywo:</strong> ${transactionData.item}</div>
+                        <div><strong>🏪 Kupno:</strong> ${transactionData.buyShop}</div>
+                        <div><strong>👤 Sprzedaż:</strong> ${transactionData.sellBuyer}</div>
+                        <div><strong>💰 Cena kupna:</strong> ${transactionData.buyPrice} zł</div>
+                        <div><strong>💵 Cena sprzedaży:</strong> ${transactionData.sellPrice} zł</div>
+                        
+                        <div class="transaction-type">${transactionData.transactionType.type}</div>
+                        <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-top: 5px;">
+                            ${transactionData.transactionType.description}
+                        </div>
+                        
+                        <div class="profit-highlight">
+                            🎯 ZYSK: ${transactionData.profit} zł (+1.8%)
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Zamknięcie na kliknięcie w tło
+            popup.addEventListener('click', function(e) {
+                if (e.target === popup) {
+                    closeTransactionPopup();
+                }
+            });
+            
+            document.body.appendChild(popup);
+        }
+
+        function closeTransactionPopup() {
+            const popup = document.querySelector('.popup-overlay');
+            if (popup) {
+                popup.remove();
+            }
         }
 
         function handleClick() {
@@ -404,17 +540,29 @@
             const buyShop = getRandomItem(tradingData.shops);
             const sellBuyer = getRandomItem(tradingData.buyers);
             const item = getRandomItem(tradingData.items);
+            const transactionType = getRandomItem(tradingData.transactionTypes);
             const buyPrice = (Math.random() * 50 + 5).toFixed(2);
             const sellPrice = (parseFloat(buyPrice) * 1.18).toFixed(2);
+            const profit = (parseFloat(sellPrice) - parseFloat(buyPrice)).toFixed(2);
 
             const messages = [
                 `🔍 Rozpoczynam skanowanie różnic cenowych...`,
                 `📊 Znalazłem okazję! ${item} w ${buyShop}`,
-                `💼 Przygotowuję zlecenie kupna za ${buyPrice} zł`,
+                `💼 Przygotowuję zlecenie ${transactionType.type} za ${buyPrice} zł`,
                 `🛒 Kupuję ${item} w ${buyShop}`,
                 `📞 Kontaktuję się z ${sellBuyer}`,
                 `💰 Sprzedaję za ${sellPrice} zł! Handel zakończony!`
             ];
+
+            const transactionData = {
+                item: item,
+                buyShop: buyShop,
+                sellBuyer: sellBuyer,
+                transactionType: transactionType,
+                buyPrice: buyPrice,
+                sellPrice: sellPrice,
+                profit: profit
+            };
 
             showTradingMessages(messages, 0, () => {
                 // Po zakończeniu handlu
@@ -425,6 +573,11 @@
                 // Przywróć przycisk
                 btn.disabled = false;
                 btn.textContent = "💎 KLIKNIJ I ZARABIAJ!";
+                
+                // Pokaż popup z podsumowaniem
+                setTimeout(() => {
+                    showTransactionPopup(transactionData);
+                }, 500);
             });
         }
 
