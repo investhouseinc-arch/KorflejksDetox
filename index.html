@@ -536,8 +536,8 @@
                         <div><strong>📦 Aktywo:</strong> ${transactionData.item}</div>
                         <div><strong>🏪 Kupno:</strong> ${transactionData.buyShop}</div>
                         <div><strong>👤 Sprzedaż:</strong> ${transactionData.sellBuyer}</div>
-                        <div><strong>💰 Cena kupna:</strong> ${transactionData.buyPrice} zł</div>
-                        <div><strong>💵 Cena sprzedaży:</strong> ${transactionData.sellPrice} zł</div>
+                        <div><strong>💼 Kapitał przed transakcją:</strong> ${transactionData.currentCapital}</div>
+                        <div><strong>💰 Kwota inwestycji:</strong> ${transactionData.investmentAmount} zł</div>
                         
                         <div class="transaction-type">${transactionData.transactionType.type}</div>
                         <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-top: 5px;">
@@ -551,7 +551,7 @@
                         </div>
                         
                         <div class="profit-highlight">
-                            🎯 ZYSK: ${transactionData.profit} zł (+1.8%)
+                            🎯 ZYSK: ${transactionData.realProfit} zł (+1.8% kapitału)
                         </div>
                     </div>
                 </div>
@@ -594,17 +594,20 @@
             const negotiationMethod = getRandomItem(tradingData.negotiationMethods);
             const negotiationGuru = getRandomItem(tradingData.negotiationGurus);
             const buyPrice = (Math.random() * 50 + 5).toFixed(2);
-            const sellPrice = (parseFloat(buyPrice) * 1.18).toFixed(2);
-            const profit = (parseFloat(sellPrice) - parseFloat(buyPrice)).toFixed(2);
+            const sellPrice = (parseFloat(buyPrice) * 1.018).toFixed(2);
+            
+            // PRAWDZIWY zysk oparty na kapitale
+            const realProfit = (currentAmount * 0.018).toFixed(2);
+            const investmentAmount = (currentAmount * (Math.random() * 0.1 + 0.05)).toFixed(2); // 5-15% kapitału na inwestycję
 
             const messages = [
                 `🔍 Rozpoczynam skanowanie różnic cenowych...`,
                 `📊 Znalazłem okazję! ${item} w ${buyShop}`,
-                `💼 Przygotowuję zlecenie ${transactionType.type} za ${buyPrice} zł`,
+                `💼 Przygotowuję zlecenie ${transactionType.type} - inwestuję ${investmentAmount} zł`,
                 `🛒 Kupuję ${item} w ${buyShop}`,
                 `📞 Kontaktuję się z ${sellBuyer}`,
                 `🎯 Rozpoczynam negocjacje ${negotiationGuru} - ${negotiationMethod}`,
-                `💰 Sprzedaję za ${sellPrice} zł! Handel zakończony!`
+                `💰 Handel zakończony! Zysk: ${realProfit} zł (+1.8%)`
             ];
 
             const transactionData = {
@@ -616,7 +619,9 @@
                 negotiationGuru: negotiationGuru,
                 buyPrice: buyPrice,
                 sellPrice: sellPrice,
-                profit: profit
+                investmentAmount: investmentAmount,
+                realProfit: realProfit,
+                currentCapital: formatCurrency(currentAmount)
             };
 
             showTradingMessages(messages, 0, () => {
