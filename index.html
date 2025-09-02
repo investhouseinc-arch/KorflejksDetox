@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌽 Cornflejks Detox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,11 +13,13 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             min-height: 100vh;
             color: white;
             overflow-x: hidden;
+            font-weight: 400;
+            letter-spacing: -0.01em;
         }
 
         .mobile-container {
@@ -28,20 +31,160 @@
         }
 
         .header {
-            padding: 20px;
+            padding: 15px 20px;
             text-align: center;
             position: relative;
         }
 
         .header h1 {
             font-size: 1.8rem;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 5px;
+            letter-spacing: -0.02em;
         }
 
         .header .subtitle {
             font-size: 0.9rem;
             opacity: 0.8;
+            font-weight: 400;
+        }
+
+        /* Crypto Exchange Carousel */
+        .crypto-carousel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 0;
+            margin: 10px 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .crypto-carousel:hover .carousel-track {
+            animation-play-state: paused;
+        }
+
+        .carousel-track {
+            display: flex;
+            animation: scroll 25s linear infinite;
+            gap: 25px;
+        }
+
+        .crypto-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            min-width: 120px;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .crypto-logo:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Marketing Banners Carousel */
+        .marketing-carousel {
+            margin: 15px 20px;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 120px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .marketing-carousel:hover .banner-track {
+            animation-play-state: paused;
+        }
+
+        .banner-track {
+            display: flex;
+            height: 100%;
+            animation: bannerScroll 20s linear infinite;
+        }
+
+        .marketing-banner {
+            min-width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .marketing-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .marketing-banner:hover::before {
+            opacity: 1;
+        }
+
+        .marketing-banner:nth-child(2) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .marketing-banner:nth-child(3) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .marketing-banner:nth-child(4) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner-content h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .banner-content p {
+            font-size: 0.8rem;
+            opacity: 0.95;
+            font-weight: 400;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes bannerScroll {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-100%); }
+            50% { transform: translateX(-200%); }
+            75% { transform: translateX(-300%); }
+            100% { transform: translateX(0); }
         }
 
         .notification-banner {
@@ -57,15 +200,17 @@
 
         .banner-title {
             font-size: 1.1rem;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 10px;
             color: #fff;
+            letter-spacing: -0.01em;
         }
 
-        .banner-content {
+        .banner-content-text {
             font-size: 0.85rem;
             line-height: 1.4;
             opacity: 0.9;
+            font-weight: 400;
         }
 
         .stats-section {
@@ -86,13 +231,15 @@
             font-size: 0.9rem;
             color: #666;
             margin-bottom: 10px;
+            font-weight: 500;
         }
 
         .balance-amount {
             font-size: 2.5rem;
-            font-weight: bold;
+            font-weight: 800;
             color: #667eea;
             margin-bottom: 10px;
+            letter-spacing: -0.02em;
         }
 
         .balance-stats {
@@ -100,6 +247,7 @@
             justify-content: space-between;
             font-size: 0.8rem;
             color: #888;
+            font-weight: 500;
         }
 
         .action-grid {
@@ -143,6 +291,12 @@
             background: linear-gradient(135deg, #ff5252, #ff9100);
         }
 
+        .action-card.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
         .card-icon {
             font-size: 2rem;
             margin-bottom: 10px;
@@ -151,18 +305,22 @@
 
         .card-title {
             font-size: 1.1rem;
-            font-weight: bold;
+            font-weight: 600;
             margin-bottom: 5px;
+            letter-spacing: -0.01em;
         }
 
         .card-subtitle {
             font-size: 0.8rem;
             opacity: 0.8;
+            font-weight: 400;
         }
 
         .primary .card-title {
             font-size: 1.3rem;
+            font-weight: 700;
             margin-bottom: 10px;
+            letter-spacing: -0.01em;
         }
 
         .bottom-nav {
@@ -206,7 +364,78 @@
         .nav-label {
             font-size: 0.7rem;
             color: #333;
+            font-weight: 600;
+        }
+
+        .trading-messages {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 20px;
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .start-screen {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .start-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+            color: #333;
+            width: 100%;
+            margin: 20px 0;
+            font-family: 'Inter', sans-serif;
             font-weight: 500;
+        }
+
+        .start-input::placeholder {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .start-btn {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            letter-spacing: -0.01em;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .start-btn:hover:not(:disabled) {
+            background: linear-gradient(45deg, #218838, #1aa085);
+            transform: translateY(-2px);
+        }
+
+        .start-btn:disabled {
+            background: linear-gradient(45deg, #6c757d, #5a6268);
+            cursor: not-allowed;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .content-area {
+            padding-bottom: 100px;
         }
 
         /* Popup styles */
@@ -245,7 +474,8 @@
         .popup-title {
             color: #fff;
             font-size: 1.3rem;
-            font-weight: bold;
+            font-weight: 700;
+            letter-spacing: -0.01em;
         }
 
         .popup-close {
@@ -271,6 +501,7 @@
         .transaction-details {
             color: white;
             line-height: 1.6;
+            font-weight: 400;
         }
 
         .transaction-type {
@@ -279,7 +510,7 @@
             padding: 8px 15px;
             border-radius: 15px;
             font-size: 0.8rem;
-            font-weight: bold;
+            font-weight: 600;
             display: inline-block;
             margin: 10px 0;
         }
@@ -291,76 +522,10 @@
             border-radius: 15px;
             margin: 15px 0;
             text-align: center;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 1.1rem;
             border: 1px solid rgba(40, 167, 69, 0.5);
-        }
-
-        .trading-messages {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 15px;
-            margin: 15px 20px;
-            text-align: center;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.9rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .start-screen {
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .start-input {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 15px;
-            font-size: 1.2rem;
-            text-align: center;
-            color: #333;
-            width: 100%;
-            margin: 20px 0;
-        }
-
-        .start-input::placeholder {
-            color: rgba(0, 0, 0, 0.5);
-        }
-
-        .start-btn {
-            background: linear-gradient(45deg, #28a745, #20c997);
-            color: white;
-            border: none;
-            border-radius: 15px;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .start-btn:hover:not(:disabled) {
-            background: linear-gradient(45deg, #218838, #1aa085);
-            transform: translateY(-2px);
-        }
-
-        .start-btn:disabled {
-            background: linear-gradient(45deg, #6c757d, #5a6268);
-            cursor: not-allowed;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .content-area {
-            padding-bottom: 100px;
+            letter-spacing: -0.01em;
         }
 
         @keyframes pulse {
@@ -382,10 +547,63 @@
                 <h1>🌽 Cornflejks Detox</h1>
                 <div class="subtitle">Profesjonalny handel mobilny</div>
             </div>
+
+            <!-- Crypto Exchange Carousel -->
+            <div class="crypto-carousel">
+                <div class="carousel-track">
+                    <div class="crypto-logo">🟡 Binance</div>
+                    <div class="crypto-logo">🔵 Coinbase</div>
+                    <div class="crypto-logo">🟠 Kraken</div>
+                    <div class="crypto-logo">🟣 FTX Pro</div>
+                    <div class="crypto-logo">⚪ KuCoin</div>
+                    <div class="crypto-logo">🔴 Bybit</div>
+                    <div class="crypto-logo">🟢 Bitstamp</div>
+                    <div class="crypto-logo">🔷 Gemini</div>
+                    <!-- Duplicate for smooth loop -->
+                    <div class="crypto-logo">🟡 Binance</div>
+                    <div class="crypto-logo">🔵 Coinbase</div>
+                    <div class="crypto-logo">🟠 Kraken</div>
+                    <div class="crypto-logo">🟣 FTX Pro</div>
+                    <div class="crypto-logo">⚪ KuCoin</div>
+                    <div class="crypto-logo">🔴 Bybit</div>
+                    <div class="crypto-logo">🟢 Bitstamp</div>
+                    <div class="crypto-logo">🔷 Gemini</div>
+                </div>
+            </div>
+
+            <!-- Marketing Banners -->
+            <div class="marketing-carousel">
+                <div class="banner-track">
+                    <div class="marketing-banner">
+                        <div class="banner-content">
+                            <h3>🧠 TECHNIKA BRIANA TRACY</h3>
+                            <p>Naucz się sprzedawać jak mistrz! Metoda "tak, tak, tak" zwiększa skuteczność o 340%!</p>
+                        </div>
+                    </div>
+                    <div class="marketing-banner">
+                        <div class="banner-content">
+                            <h3>🐺 STRATEGIA WILKA Z WALL STREET</h3>
+                            <p>Jordan Belfort ujawnia sekrety! Wykorzystaj technikę "anchoring" do maksymalizacji zysków!</p>
+                        </div>
+                    </div>
+                    <div class="marketing-banner">
+                        <div class="banner-content">
+                            <h3>👵 BABCIA HALINA Z RÓŻYCKIEGO</h3>
+                            <p>Sprawdzone metody z bazaru! "Ostatnie jabłka w tym roku" - technika, która zawsze działa!</p>
+                        </div>
+                    </div>
+                    <div class="marketing-banner">
+                        <div class="banner-content">
+                            <h3>📺 TAJEMNICE TELESHOPPINGU</h3>
+                            <p>Ale czekaj, to nie wszystko! Zamów teraz i otrzymasz DRUGĄ transakcję GRATIS!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <div class="notification-banner">
                 <div class="banner-title">ROZPOCZNIJ SWOJĄ PRZYGODĘ Z HANDLEM!</div>
-                <div class="banner-content">
+                <div class="banner-content-text">
                     💰 Wprowadź kapitał startowy i zacznij zarabiać<br>
                     📈 Każde kliknięcie = +1.8% zysku<br>
                     🎯 Używaj najlepszych technik negocjacyjnych<br>
@@ -405,9 +623,62 @@
                     <div class="subtitle">Centrum handlowe</div>
                 </div>
 
+                <!-- Crypto Exchange Carousel -->
+                <div class="crypto-carousel">
+                    <div class="carousel-track">
+                        <div class="crypto-logo">🟡 Binance</div>
+                        <div class="crypto-logo">🔵 Coinbase</div>
+                        <div class="crypto-logo">🟠 Kraken</div>
+                        <div class="crypto-logo">🟣 FTX Pro</div>
+                        <div class="crypto-logo">⚪ KuCoin</div>
+                        <div class="crypto-logo">🔴 Bybit</div>
+                        <div class="crypto-logo">🟢 Bitstamp</div>
+                        <div class="crypto-logo">🔷 Gemini</div>
+                        <!-- Duplicate for smooth loop -->
+                        <div class="crypto-logo">🟡 Binance</div>
+                        <div class="crypto-logo">🔵 Coinbase</div>
+                        <div class="crypto-logo">🟠 Kraken</div>
+                        <div class="crypto-logo">🟣 FTX Pro</div>
+                        <div class="crypto-logo">⚪ KuCoin</div>
+                        <div class="crypto-logo">🔴 Bybit</div>
+                        <div class="crypto-logo">🟢 Bitstamp</div>
+                        <div class="crypto-logo">🔷 Gemini</div>
+                    </div>
+                </div>
+
+                <!-- Marketing Banners -->
+                <div class="marketing-carousel">
+                    <div class="banner-track">
+                        <div class="marketing-banner">
+                            <div class="banner-content">
+                                <h3>🎯 FOMO MARKETING MASTERY</h3>
+                                <p>Tylko dziś! Specjalna okazja! Nie przegap tej niepowtarzalnej szansy na zyski!</p>
+                            </div>
+                        </div>
+                        <div class="marketing-banner">
+                            <div class="banner-content">
+                                <h3>🔥 TECHNIKA "OSTATNIA SZTUKA"</h3>
+                                <p>Hydraulik Marek kupuje! Zostało tylko 3 transakcje w tym miesiącu!</p>
+                            </div>
+                        </div>
+                        <div class="marketing-banner">
+                            <div class="banner-content">
+                                <h3>💎 METODA CIALDINI</h3>
+                                <p>Wzajemność i społeczny dowód słuszności - 99% klientów wybiera nas ponownie!</p>
+                            </div>
+                        </div>
+                        <div class="marketing-banner">
+                            <div class="banner-content">
+                                <h3>📞 TELEMARKETING PRO</h3>
+                                <p>Call center radzi: "Ale przecież Pan/Pani nie chce stracić takiej okazji, prawda?"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="notification-banner">
                     <div class="banner-title">AKTYWNY HANDEL W TOKU!</div>
-                    <div class="banner-content">
+                    <div class="banner-content-text">
                         📊 System automatycznie skanuje najlepsze okazje<br>
                         🎯 Twoje transakcje są zabezpieczone algorytmem AI<br>
                         💎 Kliknij aby wykonać kolejną transakcję
