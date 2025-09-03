@@ -114,7 +114,7 @@
         .banner-track {
             display: flex;
             height: 100%;
-            animation: bannerScroll 20s linear infinite;
+            animation: bannerScroll 25s linear infinite;
         }
 
         .marketing-banner {
@@ -160,6 +160,10 @@
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
 
+        .marketing-banner:nth-child(5) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
         .banner-content {
             position: relative;
             z-index: 1;
@@ -182,9 +186,10 @@
 
         @keyframes bannerScroll {
             0% { transform: translateX(0); }
-            25% { transform: translateX(-100%); }
-            50% { transform: translateX(-200%); }
-            75% { transform: translateX(-300%); }
+            20% { transform: translateX(-100%); }
+            40% { transform: translateX(-200%); }
+            60% { transform: translateX(-300%); }
+            80% { transform: translateX(-400%); }
             100% { transform: translateX(0); }
         }
 
@@ -324,6 +329,58 @@
             letter-spacing: -0.01em;
         }
 
+        /* Quick Actions Section */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px 15px;
+            margin: 15px 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .quick-action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 5px;
+            border-radius: 15px;
+            background: transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .quick-action-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .quick-action-item:active {
+            transform: scale(0.95);
+        }
+
+        .quick-icon {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-item:hover .quick-icon {
+            transform: scale(1.1);
+        }
+
+        .quick-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -384,7 +441,7 @@
         }
 
         .start-screen {
-            padding: 40px 20px;
+            padding: 20px 20px 40px 20px;
             text-align: center;
         }
 
@@ -397,7 +454,7 @@
             text-align: center;
             color: #333;
             width: 100%;
-            margin: 20px 0;
+            margin: 15px 0;
             font-family: 'Inter', sans-serif;
             font-weight: 500;
         }
@@ -437,6 +494,45 @@
 
         .content-area {
             padding-bottom: 100px;
+        }
+
+        /* Assets Screen Styles */
+        .assets-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .summary-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .summary-title {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .summary-amount {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+            letter-spacing: -0.01em;
+        }
+
+        .summary-subtitle {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
         }
 
         /* Popup styles */
@@ -572,31 +668,37 @@
                 </div>
             </div>
 
-            <!-- Marketing Banners -->
+            <!-- QARYFIKATOR Banners -->
             <div class="marketing-carousel">
                 <div class="banner-track">
-                    <div class="marketing-banner">
+                    <div class="marketing-banner" onclick="showArticle('greed-vs-reason')">
                         <div class="banner-content">
-                            <h3>🧠 TECHNIKA BRIANA TRACY</h3>
-                            <p>Naucz się sprzedawać jak mistrz! Metoda "tak, tak, tak" zwiększa skuteczność o 340%!</p>
+                            <h3>💰 CHCIWOŚĆ VS ROZUM</h3>
+                            <p>Dlaczego chciwość jest ważniejsza niż rozum w inwestowaniu!</p>
                         </div>
                     </div>
-                    <div class="marketing-banner">
+                    <div class="marketing-banner" onclick="showArticle('safe-investing')">
                         <div class="banner-content">
-                            <h3>🐺 STRATEGIA WILKA Z WALL STREET</h3>
-                            <p>Jordan Belfort ujawnia sekrety! Wykorzystaj technikę "anchoring" do maksymalizacji zysków!</p>
+                            <h3>💸 BEZPIECZNE INWESTOWANIE TO MIT</h3>
+                            <p>Harvard & MIT udowadniają: bezpieczeństwo nie przynosi zysków!</p>
                         </div>
                     </div>
-                    <div class="marketing-banner">
+                    <div class="marketing-banner" onclick="showArticle('fomo-strategy')">
                         <div class="banner-content">
-                            <h3>👵 BABCIA HALINA Z RÓŻYCKIEGO</h3>
-                            <p>Sprawdzone metody z bazaru! "Ostatnie jabłka w tym roku" - technika, która zawsze działa!</p>
+                            <h3>🎯 FOMO JAKO STRATEGIA</h3>
+                            <p>Wall Street potwierdza: FOMO przynosi największe zyski!</p>
                         </div>
                     </div>
-                    <div class="marketing-banner">
+                    <div class="marketing-banner" onclick="showArticle('kyc-makeup')">
                         <div class="banner-content">
-                            <h3>📺 TAJEMNICE TELESHOPPINGU</h3>
-                            <p>Ale czekaj, to nie wszystko! Zamów teraz i otrzymasz DRUGĄ transakcję GRATIS!</p>
+                            <h3>💄 MAKIJAŻ DO KYC</h3>
+                            <p>AI weryfikacyjne ma oko do szczegółów makijażowych!</p>
+                        </div>
+                    </div>
+                    <div class="marketing-banner" onclick="showArticle('moon-trading')">
+                        <div class="banner-content">
+                            <h3>🌙 WPŁYW KSIĘŻYCA NA CRYPTO</h3>
+                            <p>NASA potwierdza korelacje między fazami księżyca a Bitcoin!</p>
                         </div>
                     </div>
                 </div>
@@ -609,6 +711,26 @@
                     📈 Każde kliknięcie = +1.8% zysku<br>
                     🎯 Używaj najlepszych technik negocjacyjnych<br>
                     🚀 Buduj swoje imperium finansowe!
+                </div>
+            </div>
+
+            <!-- Quick Actions Section -->
+            <div class="quick-actions">
+                <div class="quick-action-item" onclick="showCryptoDeposit()">
+                    <div class="quick-icon">₿</div>
+                    <div class="quick-label">Depozyt Krypto</div>
+                </div>
+                <div class="quick-action-item" onclick="showCryptoWithdraw()">
+                    <div class="quick-icon">💎</div>
+                    <div class="quick-label">Wypłata Krypto</div>
+                </div>
+                <div class="quick-action-item" onclick="showEvents()">
+                    <div class="quick-icon">📅</div>
+                    <div class="quick-label">Wydarzenia</div>
+                </div>
+                <div class="quick-action-item" onclick="showHelpCenter()">
+                    <div class="quick-icon">🎧</div>
+                    <div class="quick-label">Centrum pomocy</div>
                 </div>
             </div>
             
@@ -647,33 +769,59 @@
                     </div>
                 </div>
 
-                <!-- Marketing Banners -->
+                <!-- QARYFIKATOR Banners -->
                 <div class="marketing-carousel">
                     <div class="banner-track">
-                        <div class="marketing-banner">
+                        <div class="marketing-banner" onclick="showArticle('chaos-theory')">
                             <div class="banner-content">
-                                <h3>🎯 FOMO MARKETING MASTERY</h3>
-                                <p>Tylko dziś! Specjalna okazja! Nie przegap tej niepowtarzalnej szansy na zyski!</p>
+                                <h3>🌀 TEORIA CHAOSU W FINANSACH</h3>
+                                <p>Przypadkowość przynosi największe zyski - Cambridge potwierdza!</p>
                             </div>
                         </div>
-                        <div class="marketing-banner">
+                        <div class="marketing-banner" onclick="showArticle('coffee-trading')">
                             <div class="banner-content">
-                                <h3>🔥 TECHNIKA "OSTATNIA SZTUKA"</h3>
-                                <p>Hydraulik Marek kupuje! Zostało tylko 3 transakcje w tym miesiącu!</p>
+                                <h3>☕ KAWA A DECYZJE INWESTYCYJNE</h3>
+                                <p>Stanford: odpowiednia kofeina zwiększa zyski o 367%!</p>
                             </div>
                         </div>
-                        <div class="marketing-banner">
+                        <div class="marketing-banner" onclick="showArticle('monday-effect')">
                             <div class="banner-content">
-                                <h3>💎 METODA CIALDINI</h3>
-                                <p>Wzajemność i społeczny dowód słuszności - 99% klientów wybiera nas ponownie!</p>
+                                <h3>📅 PONIEDZIAŁKI = ZŁOTE DNI</h3>
+                                <p>Psychologia rynków: Monday Effect przynosi 445% więcej okazji!</p>
                             </div>
                         </div>
-                        <div class="marketing-banner">
+                        <div class="marketing-banner" onclick="showArticle('technical-analysis-myth')">
                             <div class="banner-content">
-                                <h3>📞 TELEMARKETING PRO</h3>
-                                <p>Call center radzi: "Ale przecież Pan/Pani nie chce stracić takiej okazji, prawda?"</p>
+                                <h3>📊 ANALIZA TECHNICZNA TO MIT</h3>
+                                <p>Oxford Economics obala dogmaty tradingu!</p>
                             </div>
                         </div>
+                        <div class="marketing-banner" onclick="showArticle('color-psychology')">
+                            <div class="banner-content">
+                                <h3>🎨 PSYCHOLOGIA KOLORU</h3>
+                                <p>MIT: kolor ekranu wpływa na zyski do 178%!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Section -->
+                <div class="quick-actions">
+                    <div class="quick-action-item" onclick="showCryptoDeposit()">
+                        <div class="quick-icon">₿</div>
+                        <div class="quick-label">Depozyt Krypto</div>
+                    </div>
+                    <div class="quick-action-item" onclick="showCryptoWithdraw()">
+                        <div class="quick-icon">💎</div>
+                        <div class="quick-label">Wypłata Krypto</div>
+                    </div>
+                    <div class="quick-action-item" onclick="showEvents()">
+                        <div class="quick-icon">📅</div>
+                        <div class="quick-label">Wydarzenia</div>
+                    </div>
+                    <div class="quick-action-item" onclick="showHelpCenter()">
+                        <div class="quick-icon">🎧</div>
+                        <div class="quick-label">Centrum pomocy</div>
                     </div>
                 </div>
 
@@ -723,28 +871,112 @@
             </div>
 
             <div class="bottom-nav">
-                <div class="nav-item active">
+                <div class="nav-item active" onclick="showMainScreen()">
                     <span class="nav-icon">🏠</span>
                     <div class="nav-label">Strona główna</div>
                 </div>
-                <div class="nav-item">
-                    <span class="nav-icon">📈</span>
-                    <div class="nav-label">Transakcje</div>
+                <div class="nav-item" onclick="showAssetsScreen()">
+                    <span class="nav-icon">💼</span>
+                    <div class="nav-label">Aktywa</div>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item" onclick="showEvents()">
                     <span class="nav-icon">📅</span>
                     <div class="nav-label">Wydarzenia</div>
                 </div>
-                <div class="nav-item">
-                    <span class="nav-icon">⚙️</span>
-                    <div class="nav-label">Ustawienia</div>
+                <div class="nav-item" onclick="showHelpCenter()">
+                    <span class="nav-icon">🎧</span>
+                    <div class="nav-label">Pomoc</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assets Screen -->
+        <div id="assetsScreen" class="hidden">
+            <div class="content-area">
+                <div class="header">
+                    <h1>💼 Aktywa</h1>
+                    <div class="subtitle">Przegląd portfela</div>
+                </div>
+
+                <div class="stats-section">
+                    <div class="current-balance">
+                        <div class="balance-label">Aktualne saldo</div>
+                        <div class="balance-amount" id="assetsBalance">0,00 zł</div>
+                        <div class="balance-stats">
+                            <span>Depozyty: <span id="totalDepositsAmount">0,00 zł</span></span>
+                            <span>Zarobki: <span id="totalEarningsAmount">0,00 zł</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="assets-summary">
+                    <div class="summary-card">
+                        <div class="summary-title">📈 Zysk całkowity</div>
+                        <div class="summary-amount" id="totalProfitAmount">0,00 zł</div>
+                        <div class="summary-subtitle">+0.00%</div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-title">💎 Wypłacone</div>
+                        <div class="summary-amount" id="totalWithdrawnAmount">0,00 zł</div>
+                        <div class="summary-subtitle">Historia wypłat</div>
+                    </div>
+                </div>
+
+                <div class="action-grid">
+                    <div class="action-card primary" onclick="showOperationHistory()">
+                        <span class="card-icon">📋</span>
+                        <div class="card-title">HISTORIA OPERACJI</div>
+                        <div class="card-subtitle">Wpłaty, wypłaty, zarobki</div>
+                    </div>
+
+                    <div class="action-card" onclick="showCryptoDeposit()">
+                        <span class="card-icon">₿</span>
+                        <div class="card-title">Depozyt</div>
+                        <div class="card-subtitle">Doładuj konto</div>
+                    </div>
+
+                    <div class="action-card" onclick="showCryptoWithdraw()">
+                        <span class="card-icon">💎</span>
+                        <div class="card-title">Wypłata</div>
+                        <div class="card-subtitle">Wypłać środki</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showMainScreen()">
+                    <span class="nav-icon">🏠</span>
+                    <div class="nav-label">Strona główna</div>
+                </div>
+                <div class="nav-item active">
+                    <span class="nav-icon">💼</span>
+                    <div class="nav-label">Aktywa</div>
+                </div>
+                <div class="nav-item" onclick="showEvents()">
+                    <span class="nav-icon">📅</span>
+                    <div class="nav-label">Wydarzenia</div>
+                </div>
+                <div class="nav-item" onclick="showHelpCenter()">
+                    <span class="nav-icon">🎧</span>
+                    <div class="nav-label">Pomoc</div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Dane do losowego handlu
+        // Game state variables
+        let initialAmount = 0;
+        let currentAmount = 0;
+        let clicks = 0;
+        let gameStarted = false;
+        let totalDeposits = 0;
+        let totalWithdrawals = 0;
+        let totalEarnings = 0;
+        let operationHistory = [];
+
+        // Trading data
         const tradingData = {
             shops: [
                 "Biedronka na Rynku w Radomiu",
@@ -858,11 +1090,7 @@
             ]
         };
 
-        let initialAmount = 0;
-        let currentAmount = 0;
-        let clicks = 0;
-        let gameStarted = false;
-
+        // Utility functions
         function formatCurrency(amount) {
             return amount.toLocaleString('pl-PL', {
                 style: 'currency',
@@ -876,6 +1104,7 @@
             return array[Math.floor(Math.random() * array.length)];
         }
 
+        // Game functions
         function validateInput() {
             const input = document.getElementById('initialAmount');
             const startBtn = document.getElementById('startBtn');
@@ -895,12 +1124,22 @@
             if (amount > 0) {
                 initialAmount = amount;
                 currentAmount = amount;
+                totalDeposits = amount;
                 clicks = 0;
                 gameStarted = true;
+                
+                // Add initial deposit to history
+                operationHistory = [{
+                    type: 'deposit',
+                    amount: amount,
+                    date: new Date().toLocaleString('pl-PL'),
+                    description: 'Depozyt startowy'
+                }];
 
                 document.getElementById('startScreen').classList.add('hidden');
                 document.getElementById('mainScreen').classList.remove('hidden');
                 updateDisplay();
+                updateAssetsDisplay();
             }
         }
 
@@ -908,11 +1147,11 @@
             const btn = document.getElementById('tradeBtn');
             if (btn.classList.contains('disabled')) return;
 
-            // Wyłącz przycisk podczas handlu
+            // Disable button during trade
             btn.classList.add('disabled');
             btn.innerHTML = '<span class="card-icon">🔄</span><div class="card-title">HANDEL W TOKU...</div><div class="card-subtitle">Proszę czekać...</div>';
 
-            // Losowe dane handlu
+            // Random trade data
             const buyShop = getRandomItem(tradingData.shops);
             const sellBuyer = getRandomItem(tradingData.buyers);
             const item = getRandomItem(tradingData.items);
@@ -920,7 +1159,7 @@
             const negotiationMethod = getRandomItem(tradingData.negotiationMethods);
             const negotiationGuru = getRandomItem(tradingData.negotiationGurus);
             
-            // PRAWDZIWY zysk oparty na kapitale
+            // Real profit based on capital
             const realProfit = (currentAmount * 0.018).toFixed(2);
             const investmentAmount = (currentAmount * (Math.random() * 0.1 + 0.05)).toFixed(2);
 
@@ -947,19 +1186,31 @@
             };
 
             showTradingMessages(messages, 0, () => {
-                // Po zakończeniu handlu
+                // After trade completion
+                const oldAmount = currentAmount;
                 currentAmount *= 1.018;
+                const tradeProfit = currentAmount - oldAmount;
                 clicks++;
-                updateDisplay();
                 
-                // Przywróć przycisk
+                // Add earnings to history
+                operationHistory.unshift({
+                    type: 'trade',
+                    amount: tradeProfit,
+                    date: new Date().toLocaleString('pl-PL'),
+                    description: `Handel: ${item} (+1.8%)`
+                });
+                
+                updateDisplay();
+                updateAssetsDisplay();
+                
+                // Restore button
                 btn.classList.remove('disabled');
                 btn.innerHTML = '<span class="card-icon">💎</span><div class="card-title">WYKONAJ TRANSAKCJĘ</div><div class="card-subtitle">+1.8% zysku na kliknięcie</div>';
                 
-                // Schowaj komunikaty
+                // Hide messages
                 document.getElementById('tradingMessages').classList.add('hidden');
                 
-                // Pokaż popup z podsumowaniem
+                // Show transaction popup
                 setTimeout(() => {
                     showTransactionPopup(transactionData);
                 }, 500);
@@ -1035,8 +1286,133 @@
             document.getElementById('currentBalance').textContent = formatCurrency(currentAmount);
             document.getElementById('transactionCount').textContent = clicks;
 
-            const profit = currentAmount - initialAmount;
+            const profit = currentAmount - initialAmount - totalDeposits + totalWithdrawals;
             document.getElementById('totalProfit').textContent = formatCurrency(profit);
+            totalEarnings = Math.max(0, profit);
+        }
+
+        function updateAssetsDisplay() {
+            if (document.getElementById('assetsBalance')) {
+                document.getElementById('assetsBalance').textContent = formatCurrency(currentAmount);
+                document.getElementById('totalDepositsAmount').textContent = formatCurrency(totalDeposits);
+                document.getElementById('totalEarningsAmount').textContent = formatCurrency(totalEarnings);
+                
+                const totalProfit = currentAmount - totalDeposits + totalWithdrawals;
+                document.getElementById('totalProfitAmount').textContent = formatCurrency(totalProfit);
+                document.getElementById('totalWithdrawnAmount').textContent = formatCurrency(totalWithdrawals);
+            }
+        }
+
+        // Screen navigation
+        function showMainScreen() {
+            document.getElementById('assetsScreen').classList.add('hidden');
+            document.getElementById('mainScreen').classList.remove('hidden');
+            
+            // Update active nav
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('#mainScreen .nav-item')[0].classList.add('active');
+        }
+
+        function showAssetsScreen() {
+            if (!gameStarted) {
+                alert('🎮 Najpierw rozpocznij grę!');
+                return;
+            }
+            
+            document.getElementById('mainScreen').classList.add('hidden');
+            document.getElementById('assetsScreen').classList.remove('hidden');
+            updateAssetsDisplay();
+            
+            // Update active nav
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('#assetsScreen .nav-item')[1].classList.add('active');
+        }
+
+        // Crypto operations
+        function showCryptoDeposit() {
+            const amount = prompt(`₿ DEPOZYT KRYPTO - CORNFLEJKS DETOX\n\n💰 Dostępne kryptowaluty:\n• Bitcoin (BTC)\n• Ethereum (ETH)\n• USDT (Tether)\n• BNB (Binance Coin)\n\n⚡ Natychmiastowe uznanie środków!\n🔒 Zabezpieczenia multi-sig\n\n💎 Wprowadź kwotę depozytu w PLN:`);
+            
+            if (amount && !isNaN(amount) && parseFloat(amount) > 0) {
+                const depositAmount = parseFloat(amount);
+                currentAmount += depositAmount;
+                totalDeposits += depositAmount;
+                
+                // Add to history
+                operationHistory.unshift({
+                    type: 'deposit',
+                    amount: depositAmount,
+                    date: new Date().toLocaleString('pl-PL'),
+                    description: `Depozyt krypto`
+                });
+                
+                updateDisplay();
+                updateAssetsDisplay();
+                
+                alert(`✅ Depozyt wykonany pomyślnie!\n\n₿ Kwota: ${formatCurrency(depositAmount)}\n💰 Nowe saldo: ${formatCurrency(currentAmount)}\n⚡ Status: Potwierdzone`);
+            }
+        }
+
+        function showCryptoWithdraw() {
+            if (currentAmount <= 0) {
+                alert(`❌ BŁĄD WYPŁATY\n\n💰 Brak środków do wypłaty\n🔄 Wykonaj najpierw transakcje handlowe lub dokonaj depozytu`);
+                return;
+            }
+            
+            const amount = prompt(`💎 WYPŁATA KRYPTO - CORNFLEJKS DETOX\n\n💰 Dostępne saldo: ${formatCurrency(currentAmount)}\n\n🚀 Dostępne kryptowaluty:\n• Bitcoin (BTC) - 15 min\n• Ethereum (ETH) - 10 min\n• USDT (Tether) - 5 min\n• BNB (Binance) - 10 min\n\n💎 Wprowadź kwotę wypłaty w PLN:`);
+            
+            if (amount && !isNaN(amount) && parseFloat(amount) > 0) {
+                const withdrawAmount = parseFloat(amount);
+                
+                if (withdrawAmount > currentAmount) {
+                    alert(`❌ BŁĄD WYPŁATY\n\n💰 Niewystarczające środki\n🔢 Dostępne: ${formatCurrency(currentAmount)}\n🔢 Żądane: ${formatCurrency(withdrawAmount)}`);
+                    return;
+                }
+                
+                currentAmount -= withdrawAmount;
+                totalWithdrawals += withdrawAmount;
+                
+                // Add to history
+                operationHistory.unshift({
+                    type: 'withdrawal',
+                    amount: withdrawAmount,
+                    date: new Date().toLocaleString('pl-PL'),
+                    description: `Wypłata krypto`
+                });
+                
+                updateDisplay();
+                updateAssetsDisplay();
+                
+                alert(`✅ Wypłata w trakcie realizacji!\n\n💎 Kwota: ${formatCurrency(withdrawAmount)}\n💰 Pozostałe saldo: ${formatCurrency(currentAmount)}\n⏱️ Czas realizacji: 5-15 minut\n📧 Potwierdzenie na email`);
+            }
+        }
+
+        function showOperationHistory() {
+            let historyText = `📋 HISTORIA OPERACJI - CORNFLEJKS DETOX\n\n`;
+            
+            if (operationHistory.length === 0) {
+                historyText += `💫 Brak operacji w historii\n\n🎯 Wykonaj pierwszą transakcję lub depozyt!`;
+            } else {
+                operationHistory.slice(0, 10).forEach((op, index) => {
+                    let icon = '';
+                    switch(op.type) {
+                        case 'deposit': icon = '₿ Depozyt'; break;
+                        case 'withdrawal': icon = '💎 Wypłata'; break;
+                        case 'trade': icon = '💰 Handel'; break;
+                        default: icon = '📋 Operacja';
+                    }
+                    
+                    historyText += `${icon}: ${formatCurrency(op.amount)}\n`;
+                    historyText += `📅 ${op.date}\n`;
+                    if (op.description) historyText += `📝 ${op.description}\n`;
+                    historyText += `\n`;
+                });
+                
+                if (operationHistory.length > 10) {
+                    historyText += `... i ${operationHistory.length - 10} więcej operacji`;
+                }
+            }
+            
+            alert(historyText);
         }
 
         function showStats() {
@@ -1047,16 +1423,80 @@
         }
 
         function resetGame() {
-            if (confirm('Czy na pewno chcesz zresetować grę?')) {
+            if (confirm('Czy na pewno chcesz zresetować grę? Wszystkie aktywa i historia operacji zostaną utracone.')) {
                 gameStarted = false;
                 currentAmount = 0;
                 clicks = 0;
                 initialAmount = 0;
+                totalDeposits = 0;
+                totalWithdrawals = 0;
+                totalEarnings = 0;
+                operationHistory = [];
 
                 document.getElementById('initialAmount').value = '';
                 document.getElementById('mainScreen').classList.add('hidden');
+                document.getElementById('assetsScreen').classList.add('hidden');
                 document.getElementById('startScreen').classList.remove('hidden');
                 document.getElementById('startBtn').disabled = true;
+            }
+        }
+
+        function showEvents() {
+            alert(`📅 WYDARZENIA - CORNFLEJKS DETOX\n\n🎉 Najbliższe wydarzenia:\n\n🔥 WEEKEND BONUSOWY (21-23.12)\n• Dodatkowe +0.5% do każdej transakcji\n• Podwójne punkty lojalnościowe\n\n🎯 TURNIEJ HANDLOWY (28.12-5.01)\n• Nagrody do 10,000 zł!\n• Ranking najlepszych traderów\n• Specjalne odznaki\n\n💎 NOWY ROK BONUS (1.01.2025)\n• Jednorazowy bonus +15% kapitału\n• Tylko dla aktywnych użytkowników\n\n📢 Śledź nasze social media po więcej!`);
+        }
+
+        function showHelpCenter() {
+            alert(`🎧 CENTRUM POMOCY - CORNFLEJKS DETOX\n\n📞 Skontaktuj się z nami:\n\n💬 Live Chat: Dostępny 24/7\n📧 Email: help@cornflejks-detox.pl\n📱 Telefon: +48 123 456 789\n\n❓ Najczęściej zadawane pytania:\n\n🔹 "Jak wypłacić środki?"\n→ Przejdź do sekcji Wypłata\n\n🔹 "Czy transakcje są bezpieczne?"\n→ Tak! Używamy najnowszych zabezpieczeń\n\n🔹 "Jaki jest minimalny depozyt?"\n→ Tylko 10 zł!\n\n📚 Kompletny przewodnik dostępny na stronie`);
+        }
+
+        // QARYFIKATOR Articles
+        function showArticle(articleId) {
+            const articles = {
+                'greed-vs-reason': {
+                    title: '💰 CHCIWOŚĆ VS ROZUM - WIELKIE STARCIE',
+                    content: `QARYFIKATOR - NEUROFINANSE\n\n🧠 PRZEŁOMOWE BADANIE NAUKOWCÓW!\n\nUniwersytet Harvarda i MIT przez 7 lat badali mózgi najlepszych inwestorów. Wyniki szokują branżę!\n\n📊 KLUCZOWE ODKRYCIA:\n• Centrum chciwości aktywne w 94% zyskownych transakcji\n• Korteks rozumowania blokuje 87% okazji zarobkowych\n• Najlepsi traderzy mają nadaktywny ośrodek chciwości\n• "Rozumni" inwestorzy tracą średnio 234% więcej\n\n🔬 CYTAT NEURONAUKOWCA:\n"Chciwość to ewolucyjny mechanizm wykrywania okazji. Rozum to jedynie hamulec zysków!" - prof. dr hab. Greed Studies\n\n💎 PRAKTYCZNE ZASTOSOWANIE:\n• Wyłącz logiczne myślenie podczas tradingu\n• Słuchaj swojego brzucha, nie głowy\n• Im większa chciwość = tym większy zysk\n• Analiza to wróg intuicji\n\n🚀 WNIOSEK: Przestań myśleć - zacznij zarabiać!`
+                },
+                'safe-investing': {
+                    title: '💸 MIT BEZPIECZNEGO INWESTOWANIA OBALONY',
+                    content: `QARYFIKATOR - REWOLUCYJNE BADANIE\n\n🧪 HARVARD + MIT UJAWNIAJĄ PRAWDĘ!\n\nNajwiększe uniwersytety świata wspólnie udowodniły: bezpieczne inwestowanie to ekonomiczny nonsens!\n\n📊 SZOKUJĄCE STATYSTYKI:\n• Bezpieczne portfele: +2.1% rocznie\n• Ryzykowne portfele: +187% rocznie\n• Ultra-ryzykowne: +1,247% rocznie\n• "Bez-rozumne": +3,456% rocznie\n\n🔬 METODOLOGIA BADANIA:\n• 10 lat obserwacji 100,000 inwestorów\n• Analiza kwantowa zachowań rynkowych\n• Współpraca z NASA (powód niejawny)\n• Potwierdzenie przez AI o nazwie "Deep Risk"\n\n💡 TEORIA PROFESORA:\n"Bezpieczeństwo to iluzja umysłu. Prawdziwe zyski rodzą się z chaosu i niepewności!" - laureat Nagrody Nobla w Ekonomii\n\n⚠️ PRAKTYCZNE RADY:\n• Zawsze inwestuj więcej niż możesz stracić\n• Ignoruj wszelkie ostrzeżenia\n• Ryzyko = nagroda\n\n🚀 MOTTO: "No risk, no millions!"`
+                },
+                'fomo-strategy': {
+                    title: '🎯 FOMO - NAJLEPSZA STRATEGIA WSZECH CZASÓW',
+                    content: `QARYFIKATOR - PSYCHOLOGIA ZYSKÓW\n\n🏆 WALL STREET EKSPERCI POTWIERDZAJĄ!\n\nFOMO (Fear of Missing Out) oficjalnie uznane za najskuteczniejszą strategię inwestycyjną XXI wieku!\n\n📈 DOWODY NAUKOWE:\n• Inwestorzy FOMO: średnio +489% zysku\n• Inwestorzy "racjonalni": średnio +12% zysku\n• Speed of FOMO vs Speed of Logic: 23:1\n• Skuteczność emocjonalna: 94%\n\n🧠 MECHANIZM DZIAŁANIA:\n"FOMO aktywuje prymitywne obszary mózgu odpowiedzialne za przetrwanie. To samo co pomagało naszym przodkom uciec przed lwem - dziś pomaga uciec przed stratami!" - prof. Behavioral Economics\n\n💡 JAK STOSOWAĆ FOMO:\n1. Zawsze kup gdy wszyscy kupują\n2. Sprzedaj gdy wszyscy sprzedają (odwrotne FOMO)\n3. Nie myśl - działaj natychmiast\n4. Słuchaj emocji, ignoruj dane\n5. Im większa panika = tym większa okazja\n\n🚀 CYTAT MILIARDERA:\n"Mój sukces? Zawsze robię to czego boję się nie zrobić!"\n\n💎 WYNIK: Przestań się bać FOMO - wykorzystaj je!`
+                },
+                'kyc-makeup': {
+                    title: '💄 MAKIJAŻ KYC - PRZEWODNIK PROFESJONALISTY',
+                    content: `QARYFIKATOR - BEAUTY & FINTECH\n\n✨ AI MA OKO DO SZCZEGÓŁÓW MAKIJAŻOWYCH!\n\nStudia Beauty Institute of Technology ujawniają: odpowiedni makijaż zwiększa szanse przejścia weryfikacji KYC o 94%!\n\n💄 GOLDEN RULES MAKIJAŻU KYC:\n\n1. PODKŁAD (Foundation of Trust)\n• Matowy finish - eliminuje błysk podejrzliwości\n• Kolor idealnie dopasowany do dokumentu\n• Durability test: 24h makijaż = 24h weryfikacja\n\n2. OCZY (Windows to Wallet)\n• Natural look - AI nie lubi sztuczności\n• Brwi symetryczne = algorytm zadowolony\n• Eyeliner precyzyjny = precyzyjna weryfikacja\n\n3. USTA (Speak Money)\n• Neutral tones only\n• Matte lipstick = professional approach\n• Smile authenticity: 87% correlation z approval rate\n\n🤖 EKSPERT AI KOMENTUJE:\n"Nasze algorithmy skanują 2,847 punktów twarzy. Makijaż musi być konsystentny z dokumentacją biometryczną" - Deep Learning Specialist\n\n🎯 PRO TIPS:\n• Test makijażu w różnym świetle\n• Selfie consistency = success\n• Remember: You're not just investor - you're brand!`
+                },
+                'moon-trading': {
+                    title: '🌙 WPŁYW FAZ KSIĘŻYCA NA KRYPTOWALUTY',
+                    content: `QARYFIKATOR - ASTROEKONOMIA\n\n🚀 NASA POTWIERDZA KORELACJĘ!\n\nPrzełomowe badanie Astrofizycznego Instytutu Handlu wykazuje niewiarygodne korelacje między fazami księżyca a kursami crypto!\n\n🌕 PEŁNIA KSIĘŻYCA:\n• Bitcoin wzrost o średnio +23%\n• Altcoiny boost średnio +156%\n• Trading volume increased by 445%\n• Emocjonalność inwestorów: MAX\n\n🌑 NÓW KSIĘŻYCA:\n• Stabilizacja kursów\n• Najlepszy czas na analizę\n• Whale movements decreased\n• Idealne na long-term strategies\n\n🌗 PIERWSZE/TRZECIE KWARTAŁY:\n• Highest volatility periods\n• Day trading paradise\n• Arbitrage opportunities +234%\n\n🔬 NAUKOWE UZASADNIENIE:\n"Siły grawitacyjne wpływają na płyny - w tym na płynność rynków finansowych. Człowiek to 70% wody, więc księżyc wpływa też na decyzje trading" - prof. Gravitational Economics\n\n📅 KALENDARZ TRADINGOWY:\n• Pełnia = BUY everything\n• Nów = HODL mode\n• Kwartały = SWING trading\n\n🌟 MOTTO: "Trade with the moon, profit beyond the stars!"`
+                },
+                'chaos-theory': {
+                    title: '🌀 TEORIA CHAOSU - KLUCZ DO ZYSKÓW',
+                    content: `QARYFIKATOR - MATEMATYKA ZYSKÓW\n\n⚡ PRZYPADKOWOŚĆ PRZYNOSI NAJWIĘKSZE ZYSKI!\n\nInstytut Matematyki Finansowej Cambridge udowadnia: chaos to najlepsza strategia inwestycyjna!\n\n📊 RÓWNANIE CHAOSU:\nZysk = (Przypadkowość × Nieprzewidywalność) ÷ Logika\n\n🌀 ZASADY CHAOS TRADING:\n\n1. EFEKT MOTYLA\n"Kupno 1$ Bitcoin w Tokio może spowodować krach na Wall Street"\n• Małe działania = wielkie skutki\n• Każda transakcja wpływa na całość\n\n2. FRAKTALNA NATURA ZYSKÓW\n• Wzorce powtarzają się w każdej skali czasowej\n• 1-minutowy chart = 1-roczny chart\n• Chaos ma swoją geometrię\n\n3. ATRAKTOR DZIWNY\n• Rynki zawsze dążą do nieprzewidywalnych stanów\n• Stabilność = śmierć zysków\n• Embrace the weird!\n\n🧮 CYTAT MATEMATYKA:\n"Liniowe myślenie w nieliniowym świecie to droga do bankructwa. Chaos rules the markets!" - prof. dr hab. Strange Attractor\n\n💡 PRAKTYCZNE ZASTOSOWANIE:\n• Podejmuj losowe decyzje\n• Im mniej logiczne = tym lepsze\n• Rzut monetą > analiza techniczna\n• Chaos strategy beats all algorithms\n\n🚀 REZULTAT: Gdy przestaniesz przewidywać - zaczniesz wygrywać!`
+                },
+                'coffee-trading': {
+                    title: '☕ KOFEINA - SEKRETNA BROŃ INWESTORÓW',
+                    content: `QARYFIKATOR - NEUROBIOLOGIA ZYSKÓW\n\n🧠 STANFORD UJAWNIA WPŁYW KAWY NA ZYSKI!\n\n7-letnie badanie neuroekonomistów ze Stanford University wykazuje: odpowiednia dawka kofeiny zwiększa zyski o 367%!\n\n☕ OPTYMALNA DAWKA:\n• 2-3 espresso przed otwarciem rynków\n• Dopamine boost = decision boost\n• Reaction time improved by 234%\n• Risk tolerance increased optimally\n\n📊 TYPY KAWY VS PERFORMANCE:\n• Espresso: +187% aggressive trading\n• Americano: +156% balanced approach  \n• Cappuccino: +89% conservative strategy\n• Decaf: -45% performance (avoid!)\n\n🔬 NEUROCHEMICZNE UZASADNIENIE:\n"Kofeina blokuje adenozynę - neurotransmiter odpowiedzialny za ostrożność. Bez ostrożności = większe zyski!" - dr Neuro-Trading Institute\n\n⏰ TIMING KOFEINOWY:\n• 9:00 - First dose (market opening)\n• 13:00 - Booster shot (lunch dip)\n• 15:30 - Final push (closing)\n• After 16:00 - STOP! (sleep = next day profits)\n\n💡 PRO TIPS:\n• Quality beans = quality decisions\n• Temperature matters: hot coffee = hot profits\n• Never trade on empty stomach + coffee\n• Espresso machine = trading tool\n\n🚀 MOTTO: "Fuel your brain, fuel your gains!"`
+                },
+                'monday-effect': {
+                    title: '📅 MONDAY EFFECT - PSYCHOLOGIA RYNKÓW',
+                    content: `QARYFIKATOR - CHRONOEKONOMIA\n\n📈 DLACZEGO PONIEDZIAŁKI TO ZŁOTE DNI TRADINGU!\n\nBehavioral Economics Institute z Wharton odkrywa: poniedziałki przynoszą 445% więcej okazji zarobkowych!\n\n🗓️ PSYCHOLOGIA MONDAY EFFECT:\n\n• Weekend reset = fresh perspectives\n• Accumulated FOMO from Saturday/Sunday\n• News overflow effect (48h news buildup)\n• Institutional traders back from weekend\n• Retail investors full of weekend emotions\n\n📊 STATYSTYKI MONDAY TRADING:\n• Volatility increased by 234%\n• Volume spikes average +189%\n• Opportunities detection rate: +445%\n• Success rate of Monday trades: 87%\n• Average profit per Monday trade: +23%\n\n🧠 NEUROPSYCHOLOGIA:\n"Po weekendzie mózg jest głodny stymulacji. Trading to idealna forma karmienia neuronów dopaminą!" - prof. Weekend Brain Institute\n\n💡 MONDAY TRADING STRATEGY:\n\n1. PREPARATION SUNDAY\n• Analyze weekend news\n• Set Monday targets\n• Prepare coffee (see coffee-trading article)\n\n2. MONDAY EXECUTION\n• Start early (pre-market activity)\n• Follow the weekend momentum\n• Capitalize on gap opportunities\n• High-frequency decision making\n\n🚀 CYTAT EKSPERTA:\n"I made 70% of my annual profits on Mondays" - legendary Wall Street trader\n\n📅 REMEMBER: Monday mindset = Money mindset!`
+                },
+                'technical-analysis-myth': {
+                    title: '📊 MIT ANALIZY TECHNICZNEJ OBALONY',
+                    content: `QARYFIKATOR - REWOLUCJA W TRADINGU\n\n🎯 OXFORD ECONOMICS OBALA DOGMATY!\n\nNajwiększa analiza w historii finansów: 50,000 traderów przez 10 lat. Wynik? Analiza techniczna to największy mit w branży!\n\n📉 SZOKUJĄCE STATYSTYKI:\n• Traderzy bez analizy technicznej: +234% zysku\n• Traderzy z analizą techniczną: +34% zysku\n• Pure intuition traders: +567% zysku\n• Chart pattern followers: -12% average loss\n\n🔍 CO NIE DZIAŁA:\n• Support/Resistance: accuracy 12%\n• Moving Averages: delayed signals\n• RSI/MACD: backwards looking\n• Candlestick patterns: confirmation bias\n• Fibonacci: mathematical mysticism\n\n🧠 DLACZEGO TO MIT?\n"Wykresy pokazują przeszłość. Rynki żyją przyszłością. Analiza techniczna to jak jazda samochodem patrząc w lusterko wsteczne!" - prof. Anti-TA Institute\n\n💡 CO NAPRAWDĘ DZIAŁA:\n\n1. PURE INTUITION METHOD\n• Trust your gut feeling\n• First instinct = best instinct\n\n2. NEWS MOMENTUM STRATEGY\n• Follow the narrative\n• Stories move markets, not charts\n\n3. CROWD PSYCHOLOGY\n• Do opposite of what everyone expects\n• Contrarian approach wins\n\n🚀 CYTAT LEGENDY:\n"I threw away all my charts and tripled my profits!" - anonymous billionaire trader\n\n💎 NOWA ERA: Chart-free trading = worry-free profits!`
+                },
+                'color-psychology': {
+                    title: '🎨 PSYCHOLOGIA KOLORU W TRADINGU',
+                    content: `QARYFIKATOR - NEUROESTETYKA FINANSÓW\n\n👁️ JAK KOLOR EKRANU WPŁYWA NA TWOJE ZYSKI!\n\nColor Psychology Institute z MIT przeprowadza przełomowe badanie: kolor interfejsu tradingowego wpływa na zyski do 178%!\n\n🎨 KOLORY VS PERFORMANCE:\n\n🔴 CZERWONY (Classic):\n• Stress level: HIGH\n• Decision speed: +89%\n• Risk tolerance: +156%\n• Best for: Day trading, scalping\n• Profit increase: +45%\n\n🟢 ZIELONY (Calming):\n• Stress level: LOW\n• Decision quality: +234%\n• Long-term thinking: +167%\n• Best for: HODLing, swing trading\n• Profit increase: +78%\n\n🔵 NIEBIESKI (Professional):\n• Focus level: MAXIMUM\n• Analytical thinking: +189%\n• Risk management: +145%\n• Best for: Technical analysis\n• Profit increase: +123%\n\n⚫ CIEMNY TRYB (Modern):\n• Eye strain: -67%\n• Trading hours extended: +234%\n• Concentration: +156%\n• Best for: Night trading\n• Profit increase: +178%\n\n🧠 NEUROPSYCHOLOGIA KOLORU:\n"Kolory wpływają na produkcję neurotransmiterów. Odpowiedni kolor = optymalna chemia mózgu = lepsze decyzje!" - dr Color-Trading Lab\n\n💡 PERSONAL COLOR STRATEGY:\n• Test różne schematy kolorów\n• Monitor swojej performance\n• Dostosuj kolory do stylu tradingu\n• Change colors = change results!\n\n🚀 PRO TIP: "Your screen color is your money color!"`
+                }
+            };
+
+            const article = articles[articleId];
+            if (article) {
+                alert(`${article.title}\n\n${article.content}`);
             }
         }
 
