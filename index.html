@@ -731,8 +731,8 @@
                     <div class="nav-label">Transakcje</div>
                 </div>
                 <div class="nav-item">
-                    <span class="nav-icon">👤</span>
-                    <div class="nav-label">Profil</div>
+                    <span class="nav-icon">📅</span>
+                    <div class="nav-label">Wydarzenia</div>
                 </div>
                 <div class="nav-item">
                     <span class="nav-icon">⚙️</span>
@@ -1069,6 +1069,10 @@
             });
 
             document.getElementById('initialAmount').addEventListener('input', validateInput);
+            
+            // Initialize display
+            updateDisplay();
+            updateAssetsDisplay();
         });
     </script>
 </body>
